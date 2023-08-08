@@ -19,44 +19,44 @@ export class User {
   email: string;
 
   @Column()
-  senha: string;
+  password: string;
 
   @Column()
   CPF: string;
 
   @Column()
-  celular: string;
+  mobile: string;
 
   @Column()
-  data_nascimento: Date;
+  birth_date: Date;
 
   @Column()
-  descricao: string;
+  description: string;
 
   @Column()
-  CEP: number;
+  ZIP_code: number;
 
   @Column()
-  estado: string;
+  state: string;
 
   @Column()
-  cidade: string;
+  city: string;
 
   @Column()
-  rua: string;
+  street: string;
 
   @Column()
-  numero: string;
+  number: string;
 
   @Column()
-  complemento: string;
+  additional_details: string;
 
   @Column({
     type: "enum",
     enum: UserType,
     default: UserType.COMPRADOR,
   })
-  tipo_de_conta: UserType;
+  account_type: UserType;
 
   @OneToMany(() => Ad, (ad) => ad.user, {
     onDelete: "CASCADE",

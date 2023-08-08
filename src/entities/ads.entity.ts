@@ -9,7 +9,7 @@ import { User } from "./users.entity";
 import { Comment } from "./comments.entity";
 import { Photo } from "./fotos.entity";
 
-export enum Combustivel {
+export enum FuelType {
   GASOLINA = "gasolina",
   ALCOOL = "alcool",
 }
@@ -20,38 +20,38 @@ export class Ad {
   id: string;
 
   @Column()
-  marca: string;
+  brand: string;
 
   @Column()
-  modelo: string;
+  model: string;
 
   @Column()
-  ano: Date;
+  year: Date;
 
   @Column({
     type: "enum",
-    enum: Combustivel,
-    default: Combustivel.GASOLINA,
+    enum: FuelType,
+    default: FuelType.GASOLINA,
   })
-  combustivel: Combustivel;
+  fuel: FuelType;
 
   @Column()
-  quilometragem: number;
+  kilometers: number;
 
   @Column()
-  cor: string;
+  color: string;
 
   @Column({ default: false })
-  bom_negocio: boolean;
+  good_deal: boolean;
 
   @Column()
-  preco: number;
+  price: number;
 
   @Column()
-  descricao: string;
+  description: string;
 
   @Column({ default: false })
-  publicado: boolean;
+  published: boolean;
 
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[];

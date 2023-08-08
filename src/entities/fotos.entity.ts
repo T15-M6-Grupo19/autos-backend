@@ -7,7 +7,7 @@ export class Photo {
   id: string;
 
   @Column()
-  foto_url: string;
+  photo_url: string;
 
   @ManyToOne(() => Ad, (ad) => ad.photos)
   ad: Ad;
