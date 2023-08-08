@@ -42,7 +42,7 @@ export class Anuncio {
   cor: string;
 
   @Column({ default: false })
-  bom_negocio: Boolean;
+  bom_negocio: boolean;
 
   @Column()
   preco: number;
