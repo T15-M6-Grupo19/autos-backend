@@ -1,23 +1,24 @@
-import { salesAdRepository } from "../../data-source"
-import { Anuncio } from "../../entities/anuncios.entity"
+import { salesAdRepository } from "../../data-source";
+import { Ad } from "../../entities/ads.entity";
 
-const updateSalesAdService = async (id:number, newSalesAdData:any):Promise<Anuncio> => {
+const updateSalesAdService = async (
+  id: number,
+  newSalesAdData: any
+): Promise<Ad> => {
+  const salesAdOldData: Ad | null = await salesAdRepository.findOne({
+    // @ts-ignore
+    where: {
+      id: id,
+    },
+  });
 
-    const salesAdOldData: Anuncio| null = await salesAdRepository.findOne({
-        // @ts-ignore
-        where:{
-            id:id
-        },
-    })
+  const salesAdData = {
+    ...salesAdOldData,
+    ...newSalesAdData,
+  };
 
-    const salesAdData ={
-        ...salesAdOldData,
-        ...newSalesAdData
-    }
+  await salesAdRepository.save(salesAdData);
+  return salesAdData;
+};
 
-    await salesAdRepository.save(salesAdData)
-    return salesAdData
-    
-}
-
-export {updateSalesAdService }
+export { updateSalesAdService };
