@@ -1,12 +1,10 @@
-import { salesAdRepository } from "../../data-source"
-import { Anuncio } from "../../entities/anuncios.entity"
+import { salesAdRepository } from "../../data-source";
+import { Ad } from "../../entities/ads.entity";
 
-const readAllSalesAdService = async ():Promise<Anuncio[]| null> => {
+const readAllSalesAdService = async (): Promise<Ad[] | null> => {
+  const salesAds: Ad[] | null = await salesAdRepository.find();
 
-    const salesAds: Anuncio[] | null = await salesAdRepository.find()
+  return salesAds;
+};
 
-    return salesAds
-    
-}
-
-export {readAllSalesAdService }
+export { readAllSalesAdService };

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Anuncio } from "../entities/anuncios.entity";
+import { Ad } from "../entities/ads.entity";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { AppError } from "../error";
@@ -9,12 +9,11 @@ const ensureSalesAdIdExists = async (
   res: Response,
   next: NextFunction
 ): Promise<Response | void> => {
-  const salesAdRepository: Repository<Anuncio> =
-    AppDataSource.getRepository(Anuncio);
+  const salesAdRepository: Repository<Ad> = AppDataSource.getRepository(Ad);
 
   const salesAdId = req.params.id;
 
-  const dataUserSalesAd: Anuncio | null = await salesAdRepository.findOne({
+  const dataUserSalesAd: Ad | null = await salesAdRepository.findOne({
     where: {
       id: salesAdId,
     },

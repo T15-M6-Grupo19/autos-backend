@@ -1,17 +1,15 @@
-import { salesAdRepository } from "../../data-source"
-import { Anuncio } from "../../entities/anuncios.entity"
+import { salesAdRepository } from "../../data-source";
+import { Ad } from "../../entities/ads.entity";
 
-const deleteSalesAdService = async (id:number):Promise<void> => {
+const deleteSalesAdService = async (id: number): Promise<void> => {
+  const salesAd: Ad | null = await salesAdRepository.findOne({
+    // @ts-ignore
+    where: {
+      id: id,
+    },
+  });
 
-    const salesAd: Anuncio| null = await salesAdRepository.findOne({
-        // @ts-ignore
-        where:{
-            id:id
-        },
-    })
+  await salesAdRepository.softRemove(salesAd!);
+};
 
-    await salesAdRepository.softRemove(salesAd!)
-    
-}
-
-export {deleteSalesAdService }
+export { deleteSalesAdService };
