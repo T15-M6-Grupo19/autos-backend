@@ -3,6 +3,7 @@ import { TSalesAd } from "../interfaces/salesAd.interfaces"
 import { createSalesAdService } from "../services/salesAd/createSalesAd.service"
 import { readAllSalesAdService } from "../services/salesAd/readAllSalesAd.service"
 import { updateSalesAdService } from "../services/salesAd/updateSalesAd.service"
+import { deleteSalesAdService } from "../services/salesAd/deleteSalesAd.service"
 
 const createSalesAdController =async (req:Request, res:Response):Promise<Response> => {
     const userId:string = res.locals.token.id
@@ -28,8 +29,18 @@ const updateSalesAdController =async (req:Request, res:Response):Promise<Respons
 
     const salesAdUpdated = await updateSalesAdService(salesAdId,newSalesAdData)
 
-    return res.json(salesAdUpdated)
+    return res.status(200).json(salesAdUpdated)
     
 }
 
-export { createSalesAdController, readAllSalesAdController,updateSalesAdController }
+const deleteSalesAdController =async (req:Request, res:Response):Promise<Response> => {
+
+    const salesAdId = Number(req.params.id)
+
+    const deleteSalesAd = await deleteSalesAdService(salesAdId)
+
+    return res.status(204).json()
+    
+}
+
+export { createSalesAdController, readAllSalesAdController,updateSalesAdController, deleteSalesAdController }
