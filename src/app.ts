@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/login', loginRoutes)
-app.use('/users',)
+// app.use('/users',)
 app.use('/anuncios', salesAdRoutes)
 
 app.use(handleErrors)
