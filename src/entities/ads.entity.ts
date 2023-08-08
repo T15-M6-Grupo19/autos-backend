@@ -15,7 +15,7 @@ export enum Combustivel {
 }
 
 @Entity("ads")
-export class Anuncio {
+export class Ad {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -42,7 +42,7 @@ export class Anuncio {
   cor: string;
 
   @Column({ default: false })
-  bom_negocio: Boolean;
+  bom_negocio: boolean;
 
   @Column()
   preco: number;
