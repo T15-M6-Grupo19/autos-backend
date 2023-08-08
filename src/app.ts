@@ -4,7 +4,7 @@ import cors from "cors"
 import express, { Application } from "express"
 import { handleErrors } from "./error"
 import loginRoutes from "./routes/login.routes"
-import salesAdRoutes from "./routes/anuncios.routes"
+import salesAdRoutes from "./routes/salesAd.routes"
 
 
 const app:Application = express()
