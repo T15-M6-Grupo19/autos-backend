@@ -1,14 +1,14 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Anuncio } from "./anuncios.entity";
+import { Ad } from "./ads.entity";
 
-@Entity("fotos")
-export class Foto {
+@Entity("photos")
+export class Photo {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   foto_url: string;
 
-  @ManyToOne(() => Anuncio, (anuncio) => anuncio.fotos)
-  anuncio: Anuncio;
+  @ManyToOne(() => Ad, (ad) => ad.fotos)
+  ad: Ad;
 }

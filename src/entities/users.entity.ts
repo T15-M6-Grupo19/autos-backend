@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Anuncio } from "./anuncios.entity";
-import { Comentario } from "./comments.entity";
+import { Ad } from "./ads.entity";
+import { Comment } from "./comments.entity";
 
 export enum UserType {
   ANUNCIANTE = "anunciante",
@@ -58,13 +58,13 @@ export class User {
   })
   tipo_de_conta: UserType;
 
-  @OneToMany(() => Anuncio, (anuncio) => anuncio.user, {
+  @OneToMany(() => Ad, (ad) => ad.user, {
     onDelete: "CASCADE",
   })
-  anuncios: Anuncio[];
+  ads: Ad[];
 
-  @OneToMany(() => Comentario, (comentario) => comentario.user, {
+  @OneToMany(() => Comment, (comment) => comment.user, {
     onDelete: "CASCADE",
   })
-  comentarios: Comentario[];
+  comments: Comment[];
 }

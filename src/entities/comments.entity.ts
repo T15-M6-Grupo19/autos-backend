@@ -7,9 +7,9 @@ import {
   Timestamp,
 } from "typeorm";
 import { User } from "./users.entity";
-import { Anuncio } from "./anuncios.entity";
+import { Anuncio } from "./ads.entity";
 
-@Entity("comentarios")
+@Entity("comments")
 export class Comentario {
   @PrimaryGeneratedColumn("uuid")
   id: string;

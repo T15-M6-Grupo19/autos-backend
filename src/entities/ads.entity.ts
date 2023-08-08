@@ -15,7 +15,7 @@ export enum Combustivel {
 }
 
 @Entity("ads")
-export class Anuncio {
+export class Ad {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
