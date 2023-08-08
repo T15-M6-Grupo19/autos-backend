@@ -7,10 +7,10 @@ import {
   Timestamp,
 } from "typeorm";
 import { User } from "./users.entity";
-import { Anuncio } from "./ads.entity";
+import { Ad } from "./ads.entity";
 
 @Entity("comments")
-export class Comentario {
+export class Comment {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -20,9 +20,9 @@ export class Comentario {
   @CreateDateColumn()
   created_at: Timestamp;
 
-  @ManyToOne(() => User, (user) => user.comentarios)
+  @ManyToOne(() => User, (user) => user.comments)
   user: User;
 
-  @ManyToOne(() => Anuncio, (anuncio) => anuncio.comentarios)
-  anuncio: Anuncio;
+  @ManyToOne(() => Ad, (ad) => ad.comments)
+  ad: Ad;
 }
