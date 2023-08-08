@@ -21,4 +21,6 @@ const salesAdRequestSchema = salesAdSchema.omit({
     publicado:true,
 })
 
+
+
 export { salesAdSchema, salesAdRequestSchema }
