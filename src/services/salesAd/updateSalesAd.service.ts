@@ -12,7 +12,7 @@ const updateSalesAdService = async (
     },
   });
 
-  const salesAdData = {
+  const salesAdData:Ad = {
     ...salesAdOldData,
     ...newSalesAdData,
   };

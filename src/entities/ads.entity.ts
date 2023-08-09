@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { User } from "./users.entity";
 import { Comment } from "./comments.entity";
-import { Photo } from "./fotos.entity";
+import { Photo } from "./photos.entity";
 
 export enum FuelType {
   GASOLINA = "gasolina",

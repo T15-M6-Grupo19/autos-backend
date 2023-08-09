@@ -2,7 +2,7 @@ import { DataSource, DataSourceOptions, Repository } from "typeorm";
 import path from "path";
 import "dotenv/config";
 import { User } from "./entities/users.entity";
-import { Anuncio } from "./entities/anuncios.entity";
+import { Ad } from "./entities/ads.entity";
 
 
 const settings = (): DataSourceOptions => {
@@ -28,7 +28,7 @@ const settings = (): DataSourceOptions => {
 const AppDataSource = new DataSource(settings());
 
 const userRepository: Repository<User> = AppDataSource.getRepository(User)
-const salesAdRepository: Repository<Anuncio> = AppDataSource.getRepository(Anuncio)
+const salesAdRepository: Repository<Ad> = AppDataSource.getRepository(Ad)
 
 
 
