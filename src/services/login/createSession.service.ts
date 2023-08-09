@@ -18,14 +18,14 @@ const createSessionService = async (loginData: TLoginRequest):Promise<object> =>
         throw new AppError('Invalid credentials', 401)
     }
 
-    const comparePassword = await compare(loginData.password, user.senha)
+    const comparePassword = await compare(loginData.password, user.password)
     if(!comparePassword){
         throw new AppError('Invalid credentials', 401)
     }
 
     const token = sign(
         {
-            account_type: user.tipo_de_conta
+            account_type: user.account_type
         },
         String(process.env.SECRET_KEY),
         {

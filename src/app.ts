@@ -14,7 +14,7 @@ app.use(cors())
 
 app.use('/login', loginRoutes)
 // app.use('/users',)
-app.use('/anuncios', salesAdRoutes)
+app.use('/salesAd', salesAdRoutes)
 
 app.use(handleErrors)
 export default app

@@ -4,10 +4,7 @@ import { User } from "../../entities/users.entity";
 import { AppError } from "../../error";
 import { TSalesAd, TSalesAdRequest } from "../../interfaces/salesAd.interfaces";
 
-const createSalesAdService = async (
-  salesAdData: TSalesAdRequest,
-  userId: string
-): Promise<TSalesAd> => {
+const createSalesAdService = async (salesAdData:TSalesAdRequest, userId:string):Promise<TSalesAd> => {
   const user: User | null = await userRepository.findOne({
     where: {
       id: userId,
