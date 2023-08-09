@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Combustivel } from "../entities/anuncios.entity"
+import { Combustivel } from "../entities/ads.entity"
 
 const salesAdSchema = z.object({
     id: z.string(),
