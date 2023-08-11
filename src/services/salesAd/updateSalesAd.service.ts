@@ -1,5 +1,7 @@
 import { salesAdRepository } from "../../data-source";
 import { Ad } from "../../entities/ads.entity";
+import { TSalesAd, TSalesAdUpdate } from "../../interfaces/salesAd.interfaces";
+import { salesAdSchema } from "../../schemas/salesAd.schemas";
 
 const updateSalesAdService = async (
   id: number,
@@ -12,8 +14,8 @@ const updateSalesAdService = async (
     },
   });
 
-  const salesAdData:Ad = {
-    ...salesAdOldData,
+  const salesAdData = {
+    ...salesAdOldData!,
     ...newSalesAdData,
   };
 
