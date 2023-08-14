@@ -1,70 +1,101 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Ad } from "./ads.entity";
-import { Comment } from "./comments.entity";
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Ad } from './ads.entity';
+import { Comment } from './comments.entity';
+import { getRounds, hash } from 'bcryptjs';
 
 export enum UserType {
-  ANUNCIANTE = "anunciante",
-  COMPRADOR = "comprador",
+  ANUNCIANTE = 'anunciante',
+  COMPRADOR = 'comprador',
 }
 
-@Entity("users")
+@Entity('users')
 export class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', unique: true })
   email: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 120 })
   password: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   CPF: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   mobile: string;
 
-  @Column()
-  birth_date: Date;
+  @Column({ type: 'date' })
+  birth_date: Date | string;
 
-  @Column()
-  description: string;
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  description?: string | undefined | null;
 
-  @Column()
-  ZIP_code: number;
+  @Column({ type: 'varchar' })
+  ZIP_code: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   state: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   city: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   street: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   number: string;
 
-  @Column()
-  additional_details: string;
+  @Column({ type: 'varchar', length: 40, nullable: true })
+  additional_details?: string | undefined | null;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: UserType,
     default: UserType.COMPRADOR,
   })
   account_type: UserType;
 
+  @CreateDateColumn({ type: 'date' })
+  createdAt?: Date | string;
+
+  @UpdateDateColumn({ type: 'date' })
+  updatedAt?: Date | string;
+
+  @DeleteDateColumn({ type: 'date' })
+  deletedAt?: Date | string;
+
   @OneToMany(() => Ad, (ad) => ad.user, {
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   ads: Ad[];
 
   @OneToMany(() => Comment, (comment) => comment.user, {
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   comments: Comment[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword(): Promise<void> {
+    if (this.password) {
+      const isHashed: number = getRounds(this.password);
+      if (!isHashed) {
+        this.password = await hash(this.password, 10);
+      }
+    }
+  }
 }

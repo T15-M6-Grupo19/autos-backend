@@ -1,13 +1,14 @@
-import { NextFunction, Request, Response } from 'express'
-import { ZodTypeAny } from 'zod'
+import { NextFunction, Request, Response } from 'express';
+import { ZodTypeAny } from 'zod';
 
-const ensureBodyIsValidMW = (schema:ZodTypeAny) => 
-(req:Request, res: Response, next:NextFunction) =>{
-    const validateData = schema.parse(req.body)
+const ensureBodyIsValidMW =
+  (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
+    const validateData = schema.parse(req.body);
 
-    req.body = validateData
+    req.body = validateData;
 
-    return next()
-}
+    return next();
+  };
 
-export { ensureBodyIsValidMW }
+export { ensureBodyIsValidMW };
