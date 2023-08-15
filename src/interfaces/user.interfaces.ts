@@ -3,7 +3,6 @@ import {
   createUserSchema,
   createdUserSchema,
   toUpdateSchema,
-  updateUserSchema,
   updatedResponseSchema,
 } from '../schemas/user.schema';
 import { DeepPartial } from 'typeorm';
