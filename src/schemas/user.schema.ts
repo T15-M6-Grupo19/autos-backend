@@ -26,3 +26,17 @@ export const createdUserSchema = createUserSchema
   .omit({
     password: true,
   });
+
+export const toUpdateSchema = createUserSchema.omit({
+  password: true,
+  ZIP_code: true,
+  state: true,
+  city: true,
+  street: true,
+  number: true,
+  additional_details: true,
+});
+
+export const updateUserSchema = toUpdateSchema.partial();
+
+export const updatedResponseSchema = createdUserSchema;
