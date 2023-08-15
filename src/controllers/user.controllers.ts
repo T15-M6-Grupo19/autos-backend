@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { createUserService } from '../services/user/createUser.service';
 import { deleteUserService } from '../services/user/deleteUser.service';
-import { updateUserService } from '../services/user/update.service';
-import { User } from '../entities/users.entity';
+import { updateUserService } from '../services/user/updateUser.service';
 
 export const createUserController = async (
   req: Request,
