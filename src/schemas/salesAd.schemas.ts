@@ -5,7 +5,7 @@ const salesAdSchema = z.object({
   id: z.string(),
   brand: z.string(),
   model: z.string(),
-  year: z.date(),
+  year: z.string(),
   fuel: z.nativeEnum(FuelType),
   kilometers: z.number(),
   color: z.string(),
