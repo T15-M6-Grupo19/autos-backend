@@ -26,7 +26,7 @@ export class Ad {
   model: string;
 
   @Column({ type: "date" })
-  year: Date | string;
+  year: string | Date;
 
   @Column({
     type: "enum",
