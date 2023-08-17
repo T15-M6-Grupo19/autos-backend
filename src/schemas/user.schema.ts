@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import { z } from "zod";
+import { salesAdSchema } from "./salesAd.schemas";
 
 export const createUserSchema = z.object({
   name: z.string(),
@@ -12,6 +13,7 @@ export const createUserSchema = z.object({
   state: z.string(),
   city: z.string(),
   street: z.string(),
+  account_type: z.string(),
   number: z.string(),
   additional_details: z.string().max(40).nullish(),
 });
@@ -40,3 +42,13 @@ export const toUpdateSchema = createUserSchema.omit({
 export const updateUserSchema = toUpdateSchema.partial();
 
 export const updatedResponseSchema = createdUserSchema;
+
+export const getAllUsersSchema = createdUserSchema
+  .extend({
+    ads: z.array(salesAdSchema),
+  })
+  .array();
+
+export const getSpecificUserSchema = createdUserSchema.extend({
+  ads: z.array(salesAdSchema),
+});
