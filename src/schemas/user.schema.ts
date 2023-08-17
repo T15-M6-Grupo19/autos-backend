@@ -13,6 +13,7 @@ export const createUserSchema = z.object({
   state: z.string(),
   city: z.string(),
   street: z.string(),
+  account_type: z.string(),
   number: z.string(),
   additional_details: z.string().max(40).nullish(),
 });
