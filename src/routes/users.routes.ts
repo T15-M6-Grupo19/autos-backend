@@ -49,6 +49,6 @@ userRoutes.get(
   "/:id",
   ensureTokenIsValidMW,
   VerifyUserMiddleware,
-  isOwnerMiddleware,
+
   getUserByIdController
 );

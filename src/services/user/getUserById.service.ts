@@ -5,12 +5,12 @@ import { TUserGetSpecificUser } from "../../interfaces/user.interfaces";
 import { getSpecificUserSchema } from "../../schemas/user.schema";
 
 const getUserByIdService = async (
-  user: User
+  id: string
 ): Promise<TUserGetSpecificUser> => {
   const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
   const findUser = await userRepo.findOne({
-    where: { id: user.id },
+    where: { id: id },
     relations: { ads: true },
   });
 
