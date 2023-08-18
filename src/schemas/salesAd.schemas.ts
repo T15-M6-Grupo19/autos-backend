@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { FuelType } from "../entities/ads.entity";
+import { createdUserSchema } from "./user.schema";
 
 const salesAdSchema = z.object({
   id: z.string(),
@@ -13,6 +14,7 @@ const salesAdSchema = z.object({
   price: z.number(),
   description: z.string(),
   published: z.boolean().default(false),
+  user: createdUserSchema,
 });
 
 const salesAdRequestSchema = salesAdSchema.omit({
@@ -21,4 +23,9 @@ const salesAdRequestSchema = salesAdSchema.omit({
   published: true,
 });
 
-export { salesAdSchema, salesAdRequestSchema };
+const salesAdCreationRequestSchema = salesAdSchema.omit({
+  id: true,
+  user: true,
+});
+
+export { salesAdSchema, salesAdRequestSchema, salesAdCreationRequestSchema };
