@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { FuelType } from "../entities/ads.entity";
+import { NewFuelType } from "../entities/ads.entity";
 import { createdUserSchema } from "./user.schema";
 
 const salesAdSchema = z.object({
@@ -7,7 +7,7 @@ const salesAdSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.string().or(z.date()),
-  fuel: z.nativeEnum(FuelType),
+  fuel: z.nativeEnum(NewFuelType),
   kilometers: z.number(),
   color: z.string(),
   good_deal: z.boolean().default(false),

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { salesAdSchema } from "./salesAd.schemas";
 import { UserType } from "../entities/users.entity";
+import { Ad } from "../entities/ads.entity";
 
 export const createUserSchema = z.object({
   name: z.string(),
@@ -44,12 +45,28 @@ export const updateUserSchema = toUpdateSchema.partial();
 
 export const updatedResponseSchema = createdUserSchema;
 
-export const getAllUsersSchema = createdUserSchema
-  .extend({
-    ads: z.array(salesAdSchema),
+export const getSpecificUserSchema = z
+  .object({
+    name: z.string(),
+    email: z.string().email(),
+    CPF: z.string(),
+    mobile: z.string(),
+    birth_date: z.string(),
+    description: z.string().max(50).nullish(),
+    ZIP_code: z.string(),
+    state: z.string(),
+    city: z.string(),
+    street: z.string(),
+    account_type: z.nativeEnum(UserType),
+    number: z.string(),
+    additional_details: z.string().max(40).nullish(),
+    id: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    deletedAt: z.string().nullable(),
   })
-  .array();
+  .extend({
+    ads: z.array(z.instanceof(Ad)),
+  });
 
-export const getSpecificUserSchema = createdUserSchema.extend({
-  ads: z.array(salesAdSchema),
-});
+export const getAllUsersSchema = getSpecificUserSchema.array();

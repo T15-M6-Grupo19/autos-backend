@@ -1,10 +1,6 @@
 import { Router } from "express";
 import { ensureBodyIsValidMW } from "../middlewares/ensureBodyIsValid.middleware";
-import {
-  createUserSchema,
-  getAllUsersSchema,
-  updateUserSchema,
-} from "../schemas/user.schema";
+import { createUserSchema, updateUserSchema } from "../schemas/user.schema";
 import { verifyEmailMiddleware } from "../middlewares/ensureUniqueEmail.middleware";
 import {
   createUserController,
@@ -49,6 +45,5 @@ userRoutes.get(
   "/:id",
   ensureTokenIsValidMW,
   VerifyUserMiddleware,
-
   getUserByIdController
 );
