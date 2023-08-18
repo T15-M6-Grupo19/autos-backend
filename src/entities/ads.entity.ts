@@ -9,9 +9,10 @@ import { User } from "./users.entity";
 import { Comment } from "./comments.entity";
 import { Photo } from "./photos.entity";
 
-export enum FuelType {
-  GASOLINA = "gasolina",
-  ALCOOL = "alcool",
+export enum NewFuelType {
+  FLEX = "flex",
+  HIBRIDO = "hibrido",
+  ELETRICO = "eletrico",
 }
 
 @Entity("ads")
@@ -30,10 +31,10 @@ export class Ad {
 
   @Column({
     type: "enum",
-    enum: FuelType,
-    default: FuelType.GASOLINA,
+    enum: NewFuelType,
+    default: NewFuelType.FLEX,
   })
-  fuel: FuelType;
+  fuel: NewFuelType;
 
   @Column()
   kilometers: number;

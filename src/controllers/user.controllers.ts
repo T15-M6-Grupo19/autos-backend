@@ -47,8 +47,8 @@ export const getUserByIdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const user = res.locals.user;
-  const getUser = await getUserByIdService(user);
+  const id = req.params.id;
+  const getUser = await getUserByIdService(id);
 
   return res.status(200).json(getUser);
 };
