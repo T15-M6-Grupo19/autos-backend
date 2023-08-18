@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { salesAdSchema } from "./salesAd.schemas";
+import { UserType } from "../entities/users.entity";
 
 export const createUserSchema = z.object({
   name: z.string(),
@@ -13,7 +14,7 @@ export const createUserSchema = z.object({
   state: z.string(),
   city: z.string(),
   street: z.string(),
-  account_type: z.string(),
+  account_type: z.nativeEnum(UserType),
   number: z.string(),
   additional_details: z.string().max(40).nullish(),
 });
