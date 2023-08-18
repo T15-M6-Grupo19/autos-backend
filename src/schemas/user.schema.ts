@@ -14,7 +14,7 @@ export const createUserSchema = z.object({
   state: z.string(),
   city: z.string(),
   street: z.string(),
-  account_type: z.nativeEnum(UserType),
+  account_type: z.nativeEnum(UserType).optional().default(UserType.COMPRADOR),
   number: z.string(),
   additional_details: z.string().max(40).nullish(),
 });
