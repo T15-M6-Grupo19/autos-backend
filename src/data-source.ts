@@ -1,8 +1,9 @@
-import { DataSource, DataSourceOptions, Repository } from 'typeorm';
-import path from 'path';
-import 'dotenv/config';
-import { User } from './entities/users.entity';
-import { Ad } from './entities/ads.entity';
+import { DataSource, DataSourceOptions, Repository } from "typeorm";
+import path from "path";
+import "dotenv/config";
+import { User } from "./entities/users.entity";
+import { Ad } from "./entities/ads.entity";
+
 
 const settings = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, './entities/**.{ts,js}');
@@ -25,8 +26,9 @@ const settings = (): DataSourceOptions => {
 
 const AppDataSource = new DataSource(settings());
 
-const userRepository: Repository<User> = AppDataSource.getRepository(User);
-const salesAdRepository: Repository<Ad> =
-  AppDataSource.getRepository(Ad);
+const userRepository: Repository<User> = AppDataSource.getRepository(User)
+const salesAdRepository: Repository<Ad> = AppDataSource.getRepository(Ad)
+
+
 
 export { AppDataSource, userRepository, salesAdRepository };

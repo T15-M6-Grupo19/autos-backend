@@ -7,11 +7,12 @@ import {
 } from "typeorm";
 import { User } from "./users.entity";
 import { Comment } from "./comments.entity";
-import { Photo } from "./fotos.entity";
+import { Photo } from "./photos.entity";
 
-export enum Combustivel {
-  GASOLINA = "gasolina",
-  ALCOOL = "alcool",
+export enum NewFuelType {
+  FLEX = "flex",
+  HIBRIDO = "hibrido",
+  ELETRICO = "eletrico",
 }
 
 @Entity("ads")
@@ -20,38 +21,38 @@ export class Ad {
   id: string;
 
   @Column()
-  marca: string;
+  brand: string;
 
   @Column()
-  modelo: string;
+  model: string;
 
-  @Column()
-  ano: Date;
+  @Column({ type: "date" })
+  year: string | Date;
 
   @Column({
     type: "enum",
-    enum: Combustivel,
-    default: Combustivel.GASOLINA,
+    enum: NewFuelType,
+    default: NewFuelType.FLEX,
   })
-  combustivel: Combustivel;
+  fuel: NewFuelType;
 
   @Column()
-  quilometragem: number;
+  kilometers: number;
 
   @Column()
-  cor: string;
+  color: string;
 
   @Column({ default: false })
-  bom_negocio: boolean;
+  good_deal: boolean;
 
   @Column()
-  preco: number;
+  price: number;
 
   @Column()
-  descricao: string;
+  description: string;
 
   @Column({ default: false })
-  publicado: boolean;
+  published: boolean;
 
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[];

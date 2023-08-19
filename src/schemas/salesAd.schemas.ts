@@ -1,26 +1,30 @@
 import { z } from "zod"
-import { Combustivel } from "../entities/ads.entity"
+import { Combustivel } from "../entities/anuncios.entity"
 
 const salesAdSchema = z.object({
-    id: z.string(),
-    marca: z.string(),
-    modelo: z.string(),
-    ano: z.date(),
-    combustivel: z.nativeEnum(Combustivel),
-    quilometragem: z.number(),
-    cor: z.string(),
-    bom_negocio: z.boolean().default(false),
-    preco: z.number(),
-    descricao: z.string(),
-    publicado: z.boolean().default(false),
-})
+  id: z.string(),
+  brand: z.string(),
+  model: z.string(),
+  year: z.string().or(z.date()),
+  fuel: z.nativeEnum(NewFuelType),
+  kilometers: z.number(),
+  color: z.string(),
+  good_deal: z.boolean().default(false),
+  price: z.number(),
+  description: z.string(),
+  published: z.boolean().default(false),
+  user: createdUserSchema,
+});
 
 const salesAdRequestSchema = salesAdSchema.omit({
-    id:true,
-    bom_negocio:true,
-    publicado:true,
-})
+  id: true,
+  good_deal: true,
+  published: true,
+});
 
+const salesAdCreationRequestSchema = salesAdSchema.omit({
+  id: true,
+  user: true,
+});
 
-
-export { salesAdSchema, salesAdRequestSchema }
+export { salesAdSchema, salesAdRequestSchema, salesAdCreationRequestSchema };
