@@ -10,3 +10,5 @@ export const commentResponseSchema = z.object({
     user: true,
   }),
 });
+
+export const getCommentsSchema = commentResponseSchema.array();

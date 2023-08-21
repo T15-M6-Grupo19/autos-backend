@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { Ad } from "../../entities/ads.entity";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../error";
-import { TCreateCommentResponse } from "../../interfaces/coment.interface";
+import { TCreateCommentResponse } from "../../interfaces/comment.interface";
 import { commentResponseSchema } from "../../schemas/comment.schema";
 import { User } from "../../entities/users.entity";
 import { Comment } from "../../entities/comments.entity";
