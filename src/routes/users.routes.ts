@@ -15,12 +15,7 @@ import { isOwnerMiddleware } from "../middlewares/ensureIsOwner.middleware";
 
 export const userRoutes: Router = Router();
 
-userRoutes.post(
-  "",
-  ensureBodyIsValidMW(createUserSchema),
-  verifyEmailMiddleware,
-  createUserController
-);
+userRoutes.post("", ensureBodyIsValidMW(createUserSchema), verifyEmailMiddleware, createUserController);
 
 userRoutes.patch(
   "/:id",
@@ -31,19 +26,8 @@ userRoutes.patch(
   updateUserController
 );
 
-userRoutes.delete(
-  "/:id",
-  ensureTokenIsValidMW,
-  VerifyUserMiddleware,
-  isOwnerMiddleware,
-  deleteUserController
-);
+userRoutes.delete("/:id", ensureTokenIsValidMW, VerifyUserMiddleware, isOwnerMiddleware, deleteUserController);
 
 userRoutes.get("", getUsersController);
 
-userRoutes.get(
-  "/:id",
-  ensureTokenIsValidMW,
-  VerifyUserMiddleware,
-  getUserByIdController
-);
+userRoutes.get("/:id", getUserByIdController);
