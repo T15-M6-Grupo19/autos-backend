@@ -78,6 +78,9 @@ export class User {
   @DeleteDateColumn({ type: 'date' })
   deletedAt?: Date | string;
 
+  @Column({type:'varchar', nullable:true})
+  reset_token?: string | null
+
   @OneToMany(() => Ad, (ad) => ad.user, {
     onDelete: 'CASCADE',
   })
