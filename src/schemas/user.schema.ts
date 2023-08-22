@@ -26,6 +26,7 @@ export const createdUserSchema = createUserSchema
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
+    reset_token: z.string().nullable()
   })
   .omit({
     password: true,
@@ -64,6 +65,7 @@ export const getSpecificUserSchema = z
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
+    reset_token: z.string().nullable()
   })
   .extend({
     ads: z.array(z.instanceof(Ad)),
