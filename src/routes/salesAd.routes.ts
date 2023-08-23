@@ -24,6 +24,7 @@ salesAdRoutes.post(
   createSalesAdController
 );
 salesAdRoutes.get("", readAllSalesAdController);
+salesAdRoutes.get("/:id", readAllSalesAdController);
 salesAdRoutes.patch(
   "/:id",
   ensureBodyIsValidMW(salesAdRequestSchema),

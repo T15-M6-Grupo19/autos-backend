@@ -5,6 +5,7 @@ import { readAllSalesAdService } from "../services/salesAd/readAllSalesAd.servic
 import { updateSalesAdService } from "../services/salesAd/updateSalesAd.service";
 import { deleteSalesAdService } from "../services/salesAd/deleteSalesAd.service";
 import { Ad } from "../entities/ads.entity";
+import { listByIdAdService } from "../services/salesAd/listByIdSalesAd.service";
 
 const createSalesAdController = async (
   req: Request,
@@ -24,6 +25,16 @@ const readAllSalesAdController = async (
   const salesAds = await readAllSalesAdService();
 
   return res.json(salesAds);
+};
+
+const listByIdSalesAdController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const salesAdId = Number(req.params.id);
+  const salesAd = await listByIdAdService(salesAdId);
+
+  return res.json(salesAd);
 };
 
 const updateSalesAdController = async (
@@ -55,6 +66,7 @@ const deleteSalesAdController = async (
 export {
   createSalesAdController,
   readAllSalesAdController,
+  listByIdSalesAdController,
   updateSalesAdController,
   deleteSalesAdController,
 };
