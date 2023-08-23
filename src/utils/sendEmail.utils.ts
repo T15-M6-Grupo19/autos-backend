@@ -11,7 +11,7 @@ export interface IEmailRequest {
 const sendEmail = async({to, subject, text}:IEmailRequest) =>{
 
     const transporter = createTransport({
-        host: "smtp.gmail.com",
+        host: process.env.SMTP_HOST,
         auth:{
             user:process.env.SMTP_USER,
             pass:process.env.SMTP_PASSWORD
@@ -19,7 +19,7 @@ const sendEmail = async({to, subject, text}:IEmailRequest) =>{
     })
 
     await transporter.sendMail({
-        from: "m.meirelles6@gmail.com",
+        from: process.env.SMTP_USER,
         to:to,
         subject:subject,
         html: text
