@@ -9,6 +9,7 @@ import {
 import {
   createSalesAdController,
   deleteSalesAdController,
+  listByIdSalesAdController,
   readAllSalesAdController,
   updateSalesAdController,
 } from "../controllers/salesAd.controllers";
@@ -24,7 +25,7 @@ salesAdRoutes.post(
   createSalesAdController
 );
 salesAdRoutes.get("", readAllSalesAdController);
-salesAdRoutes.get("/:id", readAllSalesAdController);
+salesAdRoutes.get("/:id", listByIdSalesAdController);
 salesAdRoutes.patch(
   "/:id",
   ensureBodyIsValidMW(salesAdRequestSchema),

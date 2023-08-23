@@ -42,7 +42,8 @@ export const toUpdateSchema = createUserSchema.omit({
   additional_details: true,
 });
 
-export const updateUserSchema = toUpdateSchema.partial();
+export const updateUserSchema = createdUserSchema.partial();
+
 
 export const updatedResponseSchema = createdUserSchema;
 

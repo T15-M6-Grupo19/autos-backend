@@ -31,9 +31,11 @@ const listByIdSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAdId = Number(req.params.id);
+  const salesAdId = req.params.id;
+  console.log("entrou 1")
+  
   const salesAd = await listByIdAdService(salesAdId);
-
+  console.log("entrou 2")
   return res.json(salesAd);
 };
 
