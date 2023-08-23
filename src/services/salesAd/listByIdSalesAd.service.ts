@@ -1,7 +1,5 @@
 import { salesAdRepository } from "../../data-source";
 import { Ad } from "../../entities/ads.entity";
-import { TSalesAd, TSalesAdUpdate } from "../../interfaces/salesAd.interfaces";
-import { salesAdSchema } from "../../schemas/salesAd.schemas";
 
 const listByIdAdService = async (
   id: number
@@ -11,6 +9,11 @@ const listByIdAdService = async (
     where: {
       id: id,
     },
+    relations: {
+        user: true,
+        photos:true,
+        comments:true,
+      },
   });
 
   return ad!;
