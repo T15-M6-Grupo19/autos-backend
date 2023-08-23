@@ -20,7 +20,7 @@ userRoutes.post("", ensureBodyIsValidMW(createUserSchema), verifyEmailMiddleware
 
 userRoutes.patch(
   "/:id",
-  ensureBodyIsValidMW(updateUserSchema),
+  // ensureBodyIsValidMW(updateUserSchema),
   ensureTokenIsValidMW,
   VerifyUserMiddleware,
   isOwnerMiddleware,
