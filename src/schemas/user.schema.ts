@@ -26,6 +26,7 @@ export const createdUserSchema = createUserSchema
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
+    reset_token: z.string().nullable()
   })
   .omit({
     password: true,
@@ -41,7 +42,8 @@ export const toUpdateSchema = createUserSchema.omit({
   additional_details: true,
 });
 
-export const updateUserSchema = toUpdateSchema.partial();
+export const updateUserSchema = createdUserSchema.partial();
+
 
 export const updatedResponseSchema = createdUserSchema;
 
@@ -64,6 +66,7 @@ export const getSpecificUserSchema = z
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
+    reset_token: z.string().nullable()
   })
   .extend({
     ads: z.array(z.instanceof(Ad)),

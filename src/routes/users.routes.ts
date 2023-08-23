@@ -12,6 +12,7 @@ import {
 import { ensureTokenIsValidMW } from "../middlewares/ensureTokenIsValid.middleware";
 import { VerifyUserMiddleware } from "../middlewares/ensureIsUserById.middleware";
 import { isOwnerMiddleware } from "../middlewares/ensureIsOwner.middleware";
+import { resetPasswordController, sendResetEmailController } from "../controllers/resetPassword.controllers";
 
 export const userRoutes: Router = Router();
 
@@ -19,7 +20,7 @@ userRoutes.post("", ensureBodyIsValidMW(createUserSchema), verifyEmailMiddleware
 
 userRoutes.patch(
   "/:id",
-  ensureBodyIsValidMW(updateUserSchema),
+  // ensureBodyIsValidMW(updateUserSchema),
   ensureTokenIsValidMW,
   VerifyUserMiddleware,
   isOwnerMiddleware,
@@ -31,3 +32,7 @@ userRoutes.delete("/:id", ensureTokenIsValidMW, VerifyUserMiddleware, isOwnerMid
 userRoutes.get("", getUsersController);
 
 userRoutes.get("/:id", getUserByIdController);
+
+userRoutes.post("/resetPassword", sendResetEmailController)
+
+userRoutes.patch("/resetPassword/:token", resetPasswordController)
