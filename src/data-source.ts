@@ -3,7 +3,7 @@ import path from "path";
 import "dotenv/config";
 import { User } from "./entities/users.entity";
 import { Ad } from "./entities/ads.entity";
-
+import { Photo } from "./entities/photos.entity";
 
 const settings = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, './entities/**.{ts,js}');
@@ -26,9 +26,8 @@ const settings = (): DataSourceOptions => {
 
 const AppDataSource = new DataSource(settings());
 
-const userRepository: Repository<User> = AppDataSource.getRepository(User)
-const salesAdRepository: Repository<Ad> = AppDataSource.getRepository(Ad)
+const userRepository: Repository<User> = AppDataSource.getRepository(User);
+const salesAdRepository: Repository<Ad> = AppDataSource.getRepository(Ad);
+const photosRepository: Repository<Photo> = AppDataSource.getRepository(Photo);
 
-
-
-export { AppDataSource, userRepository, salesAdRepository };
+export { AppDataSource, userRepository, salesAdRepository, photosRepository };
