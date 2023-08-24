@@ -13,7 +13,7 @@ const createSalesAdController = async (
 ): Promise<Response> => {
   const userId: string = res.locals.token.id;
 
-  const newSalesAd: TSalesAd = await createSalesAdService(req.body, userId);
+  const newSalesAd: any = await createSalesAdService(req.body, userId);
 
   return res.status(201).json(newSalesAd);
 };
