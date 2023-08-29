@@ -12,7 +12,7 @@ const getUserByIdService = async (
 
   const findUser = await userRepo.findOne({
     where: { id: id },
-    relations: { ads: true },
+    relations: { ads: {photos: true} },
   });
 
   if (!findUser) {

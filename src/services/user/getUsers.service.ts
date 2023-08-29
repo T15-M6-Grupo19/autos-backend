@@ -8,7 +8,7 @@ const getUsersService = async (): Promise<TUserGetAllUsers> => {
   const usersRepo: Repository<User> = AppDataSource.getRepository(User);
   const users = await usersRepo.find({
     relations: {
-      ads: true,
+      ads: {photos: true},
     },
   });
   return getAllUsersSchema.parse(users);
