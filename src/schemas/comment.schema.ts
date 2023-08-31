@@ -7,7 +7,7 @@ export const commentResponseSchema = z.object({
   comment_text: z.string(),
   user: createdUserSchema,
   ad: salesAdSchema.omit({
-    // user: true,
+    photos: true
   }),
 });
 
