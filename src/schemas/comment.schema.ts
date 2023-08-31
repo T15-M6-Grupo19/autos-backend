@@ -6,9 +6,7 @@ export const commentResponseSchema = z.object({
   id: z.string(),
   comment_text: z.string(),
   user: createdUserSchema,
-  ad: salesAdSchema.omit({
-    // user: true,
-  }),
+  ad: salesAdSchema.omit({ photos: true }),
 });
 
 export const getCommentsSchema = commentResponseSchema.array();

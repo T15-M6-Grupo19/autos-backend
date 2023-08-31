@@ -15,16 +15,13 @@ const salesAdSchema = z.object({
   description: z.string(),
   published: z.boolean().default(false),
   // user: createdUserSchema,
-  photos: z.string().array()
+  photos: z.string().array(),
 });
-
-
-
 
 const salesAdRequestSchema = salesAdSchema.omit({
   id: true,
-  // good_deal: true,
-  // published: true,
+  good_deal: true,
+  published: true,
 });
 
 const salesAdCreationRequestSchema = salesAdSchema.omit({
