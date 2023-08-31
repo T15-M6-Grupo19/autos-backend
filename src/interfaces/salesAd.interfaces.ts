@@ -6,6 +6,6 @@ import {
 import { DeepPartial } from "typeorm";
 
 type TSalesAd = z.infer<typeof salesAdSchema>;
-type TSalesAdRequest = z.infer<typeof salesAdRequestSchema>;
+type TSalesAdRequest = z.infer<typeof salesAdSchema>;
 type TSalesAdUpdate = DeepPartial<typeof salesAdRequestSchema>;
 export { TSalesAd, TSalesAdRequest, TSalesAdUpdate };
