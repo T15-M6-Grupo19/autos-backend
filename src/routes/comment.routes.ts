@@ -23,7 +23,6 @@ commentRoutes.patch(
   "/:id",
   ensureTokenIsValidMW,
   VerifyUserMiddleware,
-  isOwnerMiddleware,
   updateCommentController
 );
 
