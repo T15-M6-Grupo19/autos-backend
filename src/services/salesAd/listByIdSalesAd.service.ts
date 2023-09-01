@@ -12,7 +12,7 @@ const listByIdAdService = async (
     relations: {
         user: true,
         photos:true,
-        comments:true,
+        comments:{user:true},
       },
   });
 
