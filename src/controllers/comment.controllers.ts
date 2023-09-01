@@ -24,9 +24,10 @@ const updateCommentController = async (
 ): Promise<Response> => {
   const { comment_text } = req.body;
   const commentId = req.params.id;
+  const userId = res.locals.user.id;
   return res
     .status(200)
-    .json(await updateCommentService(commentId, comment_text));
+    .json(await updateCommentService(commentId, comment_text, userId));
 };
 
 const getCommentByIdController = async (

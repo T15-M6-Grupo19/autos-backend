@@ -58,9 +58,9 @@ const deleteSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAdId = Number(req.params.id);
+  const salesAdId = req.params.id;
 
-  const deleteSalesAd: void = await deleteSalesAdService(salesAdId);
+  await deleteSalesAdService(salesAdId);
 
   return res.status(204).json();
 };
