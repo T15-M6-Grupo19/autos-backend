@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { NewFuelType } from "../entities/ads.entity";
-import { createdUserSchema } from "./user.schema";
+import { z } from 'zod';
+import { NewFuelType } from '../entities/ads.entity';
+import { createdUserSchema } from './user.schema';
 
 const salesAdSchema = z.object({
   id: z.string(),

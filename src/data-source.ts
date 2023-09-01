@@ -6,8 +6,8 @@ import { Ad } from "./entities/ads.entity";
 import { Photo } from "./entities/photos.entity";
 
 const settings = (): DataSourceOptions => {
-  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
-  const migrationPath: string = path.join(__dirname, "./migrations/**.{ts,js}");
+  const entitiesPath: string = path.join(__dirname, './entities/**.{ts,js}');
+  const migrationPath: string = path.join(__dirname, './migrations/**.{ts,js}');
   const nodeEnv: string | undefined = process.env.NODE_ENV;
 
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -15,7 +15,7 @@ const settings = (): DataSourceOptions => {
   if (!dbUrl) throw new Error("Missing env var: 'DATABASE_URL'");
 
   return {
-    type: "postgres",
+    type: 'postgres',
     url: dbUrl,
     synchronize: false,
     logging: true,
