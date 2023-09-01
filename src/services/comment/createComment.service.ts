@@ -29,6 +29,7 @@ export const CreateCommentService = async (
 
   const newComment: Comment = commentRepository.create({
     comment_text: text,
+    created_at: new Date(),
     ad: ad,
     user: user,
   });

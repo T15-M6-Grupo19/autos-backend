@@ -6,6 +6,7 @@ export const commentResponseSchema = z.object({
   id: z.string(),
   comment_text: z.string(),
   user: createdUserSchema,
+  created_at: z.date(),
   ad: salesAdSchema.omit({
     photos: true
   }),
