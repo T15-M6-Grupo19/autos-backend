@@ -22,7 +22,8 @@ const readAllSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAds = await readAllSalesAdService();
+  const queries = req.query
+  const salesAds = await readAllSalesAdService(queries);
 
   return res.json(salesAds);
 };
