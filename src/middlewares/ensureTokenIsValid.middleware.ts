@@ -10,6 +10,8 @@ const ensureTokenIsValidMW = async (
 ): Promise<Response | void> => {
   const authorization = req.headers.authorization;
 
+
+  console.log(req.body)
   if (!authorization) {
     throw new AppError('Missing bearer token', 401);
   }

@@ -2,13 +2,15 @@ import { salesAdRepository } from "../../data-source"
 import { Ad } from "../../entities/ads.entity"
 import { TSalesPagination } from "../../interfaces/salesAd.interfaces";
 
-const readAllSalesAdService = async (queries: any): Promise<Ad[] | TSalesPagination | null> => {
+const readAllSalesAdService = async (queries: any): Promise<any> => {
 
   const salesAds: Ad[] | null = await salesAdRepository.find({
     relations:{
       photos: true
     }
   });
+
+  console.log(salesAds, "não ta carregando é nada")
 
   const adAmount = await salesAdRepository.count()
 
@@ -22,6 +24,9 @@ const readAllSalesAdService = async (queries: any): Promise<Ad[] | TSalesPaginat
       order: { price: "asc" },
       skip: perPage * (page - 1),
       take: perPage,
+      relations:{
+        photos: true
+      }
     });
 
     let nextAmount: string | null
@@ -43,6 +48,7 @@ const readAllSalesAdService = async (queries: any): Promise<Ad[] | TSalesPaginat
   
   }
 
+  console.log(salesAds, "retorno que deveria acontecer")
   return salesAds
 };
 

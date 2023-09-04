@@ -44,7 +44,7 @@ const updateSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAdId = Number(req.params.id);
+  const salesAdId = req.params.id;
   const newSalesAdData: TSalesAdUpdate = req.body;
 
   const salesAdUpdated: Ad = await updateSalesAdService(
