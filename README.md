@@ -44,7 +44,7 @@ Siga os passos abaixo para configurar e executar o back-end:
 
 ## Endpoints da API
 
-Todas as rotas desta API foram mapeadas e documentadas usando o Swagger, uma ferramenta popular para criar documentação interativa de API. Para acessar e explorar todas as rotas disponíveis, recomendamos o uso da documentação gerada pelo Swagger.
+Todas as rotas desta API foram mapeadas e documentadas usando o Swagger, uma ferramenta popular para criar documentação interativa de API. Para acessar e explorar todas as rotas disponíveis, recomendamos o uso da documentação gerada pelo Swagger. Para acessar a **documentação do Swagger** acesse essa URL: http://localhost:3000/api-docs/#/
 <br/>
 
 | Método | Endpoint      | Responsabilidade                        | Autenticação                |
