@@ -1,7 +1,7 @@
 import { userRepository } from '../../data-source';
 import { User } from '../../entities/users.entity';
 import { AppError } from '../../error';
-import { randomUUID } from 'node:crypto';
+import { randomUUID } from 'crypto';
 import { resetPasswordTemplate, sendEmail } from '../../utils/sendEmail.utils';
 
 const sendResetEmailService = async (email: string) => {
