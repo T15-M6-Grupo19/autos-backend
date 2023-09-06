@@ -22,7 +22,8 @@ const readAllSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAds = await readAllSalesAdService();
+  const queries = req.query
+  const salesAds = await readAllSalesAdService(queries);
 
   return res.json(salesAds);
 };
@@ -43,7 +44,7 @@ const updateSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAdId = Number(req.params.id);
+  const salesAdId = req.params.id;
   const newSalesAdData: TSalesAdUpdate = req.body;
 
   const salesAdUpdated: Ad = await updateSalesAdService(
@@ -58,9 +59,9 @@ const deleteSalesAdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const salesAdId = Number(req.params.id);
+  const salesAdId = req.params.id;
 
-  const deleteSalesAd: void = await deleteSalesAdService(salesAdId);
+  await deleteSalesAdService(salesAdId);
 
   return res.status(204).json();
 };

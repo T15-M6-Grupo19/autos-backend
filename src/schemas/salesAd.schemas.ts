@@ -6,7 +6,7 @@ const salesAdSchema = z.object({
   id: z.string(),
   brand: z.string(),
   model: z.string(),
-  year: z.string().or(z.date()),
+  year: z.string(),
   fuel: z.nativeEnum(NewFuelType),
   kilometers: z.number(),
   color: z.string(),
@@ -15,16 +15,13 @@ const salesAdSchema = z.object({
   description: z.string(),
   published: z.boolean().default(false),
   // user: createdUserSchema,
-  photos: z.string().array()
+  photos: z.string().array(),
 });
-
-
-
 
 const salesAdRequestSchema = salesAdSchema.omit({
   id: true,
-  // good_deal: true,
-  // published: true,
+  good_deal: true,
+  published: true,
 });
 
 const salesAdCreationRequestSchema = salesAdSchema.omit({

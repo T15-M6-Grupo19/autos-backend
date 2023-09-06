@@ -1,0 +1,665 @@
+{
+     "openapi":"3.0.0",
+     "info":{
+          "title": "API de venda de automoveis",
+          "description": "API de venda de automoveis, manipulação de criação de anuncios, e etc...",
+          "contact":{
+               "email": "brunoabreudevs@gmail.com"
+          },
+          "version": "1.0.0"     
+     },
+     "servers":[
+          {
+               "url":"http://localhost:3000",
+               "description": "API de teste"
+          },
+          {
+               "url":"http://render",
+               "description": "API de produção"
+          }
+     ],
+     "paths": {
+          "/users/":{
+               "post": {
+                    "summary": "Cadastro de usuário",
+                    "description": "Essa rota é utilizada para criação de usuario.",
+                    "tags": ["Usuário"],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/User"
+                                   }
+                              }
+                         }
+                    },
+                    "responses":{
+                         "409":{
+                              "description":"Email already exist"
+                         },
+                         "201":{
+                              "description":"Created successfully",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/User"
+                                        }
+                                   }
+                              }
+                         }    
+                    }
+               },
+               "get": {
+                    "summary": "Resgate de todos usuários",
+                    "description": "Essa rota é utilizada para resgatar todos usuários. ",
+                    "tags": ["Usuário"],
+                    "parameters": [ {
+                         "name":"/users",
+                         "in":"query",
+                         "description":"Buscar todos usuários.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         }
+                    }
+               }
+          },
+          "/users/:id":{
+               "get": {
+                    "summary": "Resgate único de usuário",
+                    "description": "Essa rota é utilizada para resgatar um usuario com base no seu Id. ",
+                    "tags": ["Usuário"],
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do usuário que deseja resgatar.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }
+                    }
+               },
+               "patch": {
+                    "summary": "Atualização de usuário",
+                    "description": "Essa rota é utilizada para atualização de usuario. ",
+                    "tags": ["Usuário"],
+                    "security":[{"bearerAuth":[]}],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/User"
+                                   }
+                              }
+                         }
+                    },
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do usuário que deseja atualizar as informações já cadastradas.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         },
+                         "400":{
+                              "description":"An uuid must be provided"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "403":{
+                              "description":"Insufficient permission"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         },
+                         "409":{
+                              "description":"Email already exist"
+                         }
+                    }
+               },
+               "delete": {
+                    "summary": "Deleção de usuário",
+                    "description": "Essa rota é utilizada para deleção de usuario. ",
+                    "tags": ["Usuário"],
+                    "security":[{"bearerAuth":[]}],
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do usuário que deseja deletar as informações já cadastradas.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "202":{
+                              "description":"Ok"
+                         },
+                         "400":{
+                              "description":"An uuid must be provided"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "403":{
+                              "description":"Insufficient permission"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }
+                    }
+               }
+
+          },
+          "/users/resetPassword":{
+               "post": {
+                    "summary": "Envio de link para email",
+                    "description": "Essa rota é utilizada para enviar link para o email do usuário para resetar. ",
+                    "tags": ["Usuário"],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/sendEmail"
+                                   }
+                              }
+                         }
+                    },
+                    "responses":{
+                         "409":{
+                              "description":"Email already exist"
+                         },
+                         "201":{
+                              "description":"'token sent!'",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/sendEmail"
+                                        }
+                                   }
+                              }
+                         }    
+                    }
+               }
+          },
+          "/users/resetPassword/:token":{
+               "patch": {
+                    "summary": "Redefinição de senha de usuário",
+                    "description": "Essa rota é utilizada para redefinir senha de usuario. ",
+                    "tags": ["Usuário"],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/resetPassword"
+                                   }
+                              }
+                         }
+                    },
+                    "parameters": [ {
+                         "name":"/resetPassword/:token",
+                         "in":"query",
+                         "description":"id do usuário que deseja atualizar as informações já cadastradas.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"password changed!"
+                         }
+                    }
+               }
+          },
+          "/login/":{
+               "post": {
+                    "summary": "Realizar login",
+                    "description": "Essa rota é utilizada para login de usuario.",
+                    "tags": ["Login"],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/Login"
+                                   }
+                              }
+                         }
+                    },
+                    "responses":{
+                         "201":{
+                              "description":"Created successfully",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/Login"
+                                        }
+                                   }
+                              }
+                         },
+                         "401":{
+                              "description":"Invalid credentials"
+                         }   
+                    }
+               }
+          },
+          "/salesAd/":{
+               "post":{
+                    "summary": "Criar um anuncio",
+                    "description": "Essa rota é utilizada para criar um anuncio.",
+                    "tags": ["Anuncio"],
+                    "security":[{"bearerAuth":[]}],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/salesAdCreation"
+                                   }
+                              }
+                         }
+                    },
+                    "responses":{
+                         "201":{
+                              "description":"Created successfully",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/salesAdCreation"
+                                        }
+                                   }
+                              }
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         }   
+                    }
+               },
+               "get":{
+                    "summary": "Resgate de todos anuncios",
+                    "description": "Essa rota é utilizada para resgatar todos anuncios. ",
+                    "tags": ["Anuncio"],
+                    "parameters": [ {
+                         "name":"/salesAd",
+                         "in":"query",
+                         "description":"Buscar todos anuncios.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         }
+                    } 
+               }
+          },
+          "/salesAd/:id":{
+               "get":{
+                    "summary": "Resgate de um anuncio",
+                    "description": "Essa rota é utilizada para resgatar único anuncios. ",
+                    "tags": ["Anuncio"],
+                    "parameters": [ {
+                         "name":"/salesAd/:id",
+                         "in":"query",
+                         "description":"Buscar único anuncio.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         }
+                    } 
+               },
+               "delete": {
+                    "summary": "Deleção de anuncio",
+                    "description": "Essa rota é utilizada para deleção de anuncio. ",
+                    "tags": ["Anuncio"],
+                    "security":[{"bearerAuth":[]}],
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do anuncio que deseja deletar as informações já cadastradas.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "204":{
+                              "description":"Ok"
+                         },
+                         "400":{
+                              "description":"An uuid must be provided"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "403":{
+                              "description":"Insufficient permission"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }
+                    }
+               },
+               "put":{
+                    "summary": "Atualização de anuncio",
+                    "description": "Essa rota é utilizada para atualizar anuncio.",
+                    "tags": ["Anuncio"],
+                    "security":[{"bearerAuth":[]}],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/salesAdCreation"
+                                   }
+                              }
+                         }
+                    },
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do anuncio que deseja atualizar as informações já cadastradas.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         }
+                    }
+               }
+          },
+          "/comment/:id":{
+               "post":{
+                    "summary": "Criar um comentario",
+                    "description": "Essa rota é utilizada para criar um comentario.",
+                    "tags": ["Comentario"],
+                    "security":[{"bearerAuth":[]}],
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do usuario que deseja mesclar com usuario.",
+                         "required":"true"                         
+                    }],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/Comment"
+                                   }
+                              }
+                         }
+                    },
+                    "responses":{
+                         "201":{
+                              "description":"Created successfully",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/Comment"
+                                        }
+                                   }
+                              }
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }   
+                    }
+               },
+               "patch": {
+                    "summary": "Atualização de comentario",
+                    "description": "Essa rota é utilizada para atualização de usuario. ",
+                    "tags": ["Comentario"],
+                    "security":[{"bearerAuth":[]}],
+                    "requestBody": {
+                         "content": {
+                              "application/json": {
+                                   "schema":{
+                                       "$ref": "#/components/schemas/Comment"
+                                   }
+                              }
+                         }
+                    },
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do usuário que deseja atualizar o comentario.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         },
+                         "400":{
+                              "description":"An uuid must be provided"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "403":{
+                              "description":"Insufficient permission"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }
+                    }
+               },
+               "get":{
+                    "summary": "Resgate de um comentario",
+                    "description": "Essa rota é utilizada para resgatar único comentario. ",
+                    "tags": ["Comentario"],
+                    "parameters": [ {
+                         "name":"/comment/:id",
+                         "in":"query",
+                         "description":"Buscar único comentario.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok"
+                         },
+                         "404":{
+                              "description":"Comment not found"
+                         }
+                    } 
+               }, 
+               "delete":{
+                    "summary": "Deleção de comentario",
+                    "description": "Essa rota é utilizada para deleção de comentario. ",
+                    "tags": ["Comentario"],
+                    "security":[{"bearerAuth":[]}],
+                    "parameters": [ {
+                         "name":"/:id",
+                         "in":"query",
+                         "description":"id do comentario que deseja deletar.",
+                         "required":"true"
+                    }],
+                    "responses":{
+                         "202":{
+                              "description":"Ok"
+                         },
+                         "400":{
+                              "description":"An uuid must be provided"
+                         },
+                         "401":{
+                              "description":"Missing bearer token"
+                         },
+                         "403":{
+                              "description":"Insufficient permission"
+                         },
+                         "404":{
+                              "description":"User not found"
+                         }
+                    }
+               }   
+          },
+          "/comment":{
+              "get":{
+                    "summary": "Resgate de todos comentarios",
+                    "description": "Essa rota é utilizada para resgatar todos comentarios. ",
+                    "tags": ["Comentario"],
+                    "parameters": [ {
+                         "name":"/comment/",
+                         "in":"query",
+                         "description":"Buscar todos comentarios.",
+                         "required":"true"                         
+                    }],
+                    "responses":{
+                         "200":{
+                              "description":"Ok",
+                              "content":{
+                                   "application/json":{
+                                        "schema":{
+                                             "type": "object",
+                                             "$ref": "#/components/schemas/Comment"
+                                        }
+                                   }
+                              }
+                         }
+                    }
+              }
+          }
+     },
+     "components":{
+          "schemas": {
+               "User":{
+                    "type":"object",
+                    "properties":{
+                         "name":{
+                              "type": "string"
+                         },
+                         "email":{
+                              "type": "string"
+                         },
+                         "password":{
+                              "type": "string"
+                         },
+                         "CPF":{
+                              "type":"string"
+                         },
+                         "mobile":{
+                              "type": "string"
+                         },
+                         "birth_date":{
+                              "type": "string"
+                         },
+                         "description":{
+                              "type": "string"
+                         },
+                         "ZIP_code":{
+                              "type": "string"
+                         },
+                         "state":{
+                              "type": "string"
+                         },
+                         "city":{
+                              "type": "string"
+                         },
+                         "street":{
+                              "type": "string"
+                         },
+                         "account_type":{
+                              "type":"string",
+                              "examples":"anunciante || comprador"
+                         },
+                         "number":{
+                              "type":"string"
+                         },
+                         "additional_details":{
+                              "type":"string"
+                         }
+                     }
+               },
+               "resetPassword":{
+                    "type":"object",
+                    "properties":{
+                         "password":{
+                              "type": "string"
+                         }
+                    }
+               },
+               "sendEmail":{
+                    "type":"object",
+                    "properties":{
+                         "email":{
+                              "type": "string"
+                         }
+                    }
+               },
+               "Login":{
+                    "type":"object",
+                    "properties":{
+                         "emai":{
+                              "type":"string"
+                         },
+                         "password":{
+                              "type": "string"
+                         }
+                    }
+               },
+               "salesAdCreation":{
+                    "type":"object",
+                    "properties":{
+                         "brand": {
+                              "type": "string"
+                         },
+                         "model": {
+                              "type": "string"
+                         },
+                         "year": {
+                              "type": "string"
+                         },
+                         "fuel": {
+                              "type": "string"
+                         },
+                         "kilometers": {
+                              "type": "number"
+                         },
+                         "color": {
+                              "type": "string"
+                         },
+                         "good_deal": {
+                              "type": "boolean"
+                         },
+                         "price": {
+                              "type": "number"
+                         },
+                         "description": {
+                              "type": "string"
+                         },
+                         "published": {
+                              "type": "boolean"
+                         },
+                         "photos": {
+                              "type": "string"
+                         }
+                    }
+               },
+               "Comment":{
+                    "type":"object",
+                    "properties":{
+                         "comment_text":{
+                              "type": "string"
+                         }
+                    }
+               }
+          },
+          "securitySchemes":{
+               "bearerAuth":{
+                    "type":"http",
+                    "scheme":"bearer",
+                    "bearerFormat":"JWT"
+               }
+          }
+     }   
+}

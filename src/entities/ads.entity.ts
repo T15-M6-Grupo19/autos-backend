@@ -26,8 +26,8 @@ export class Ad {
   @Column()
   model: string;
 
-  @Column({ type: "date" })
-  year: string | Date;
+  @Column()
+  year: string ;
 
   @Column({
     type: "enum",
@@ -57,7 +57,7 @@ export class Ad {
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[];
 
-  @OneToMany(() => Photo, (photos) => photos.ad)
+  @OneToMany(() => Photo, (photos) => photos.ad, {onDelete:"CASCADE"})
   photos: Photo[];
 
   @ManyToOne(() => User, (user) => user.ads)
